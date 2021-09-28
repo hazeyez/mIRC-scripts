@@ -1,0 +1,74 @@
+menu menubar {
+  Away
+  .Away:/away2 $$?="Away msg"
+  .Back:/back2
+}
+on 1:connect:{
+  unset %away
+  unset %reasone
+  set %away $script
+  prot.away
+}
+alias away2 {
+  set %awaygone $ctime
+  away 12 $+ $1- ( Since: $asctime(h:nn:sstt) )
+  ame is away. Reason:12 $1- ( On:12 $asctime(h:nn:sstt) ) - script v1.01 by hazeyez -
+  set %reasone $1-
+  halt
+  set $nick h[a]zeyez
+}
+alias back2 {
+  if ($away == $true) {
+    away
+    ame is back. Reason:12 %reasone ( Away for:12 $replace($duration($calc($ctime - %awaygone)),wks,w,wk,w,days,d,day,d,hrs,h,hr,h,mins,m,min,m,secs,s,sec,s) ) - script v1.01 by hazeyez -
+    unset %awaygone
+    unset %reasone
+    halt
+  }
+  elseif {$away == $false} { 
+    halt
+  }
+} 
+alias idler {
+  if ($away == $false) && ($idle >= 600) {
+    set %awaygone $ctime    
+    ame is away. Reason:12 Away From Keybord - Auto Idler ( On:12 $asctime(h:nn:sstt) ) - script v1.01 by hazeyez -   
+    away 12Away From Keybord - Auto Idle
+    halt
+  }
+  elseif ($away == $true) {
+    halt 
+  }
+}
+alias F2 {
+  echo -a Press F3 - for away.
+  echo -a Press F4 - for back.
+}
+alias F3 {
+  away2 $$?="Away msg"
+}
+alias F4 {
+  back2
+}
+alias -l prot.away {
+  if ($exists(%away) == $true) && ($file(%away).size != 3180)  { prot.away.fal }
+  else {
+    timeridle 0 300 idler
+    unset %awaygone
+  }
+}
+alias -l prot.away.fal {
+  echo -a 4-> 8/4!8\ script v1.01 by hazeyez  8/4!8\ 4<-
+  unload -rs %away
+  halt
+}
+on 1:load:{
+  echo -a script v1.01 by hazeyez loaded ! Press F2 for help !
+  set %away $script
+  prot.away
+}
+on 1:unload:{
+  echo -a script v1.01 by hazeyez unloaded !
+  unset %away
+  unset %reasone
+}
