@@ -15,7 +15,6 @@ alias away2 {
   ame is away. Reason:12 $1- ( On:12 $asctime(h:nn:sstt) ) - script v1.01 by hazeyez -
   set %reasone $1-
   halt
-  set $nick h[a]zeyez
 }
 alias back2 {
   if ($away == $true) {
