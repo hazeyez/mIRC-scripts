@@ -1,0 +1,16 @@
+# This script will open a new window titled "highlights" and log messages from in chan that are addressed to your specific nickname
+# save it as a Remote script
+#by hazeyez
+
+on *:TEXT:*:#:{
+  if ($me isin $1-) {
+    /window -b @Highlights
+    echo @Highlights $asctime(h:nn:ss tt) : $nick 12// $network 12// $chan 12// Message 4,1: $+ $1-
+  }
+}
+on *:ACTION:*:#:{
+  if ($me isin $1-) {
+    /window -b @Highlights
+    echo @Highlights $asctime(h:nn:ss tt) : $nick 12// $network 12// $chan 12// Message 4,1: $+ $1-
+  }
+}
