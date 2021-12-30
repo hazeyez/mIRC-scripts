@@ -1,0 +1,12 @@
+on *:TEXT:*:#:{
+  if ($me isin $1-) {
+    /window -b @Highlights
+    echo @Highlights $asctime(h:nn:ss tt) : 62 $nick 50.62.74.86.|.74.62.50. $network 50.62.74.86.|.74.62.50. $chan 50.62.74.86.|.74.62.50. Message: 62 $+ $1-
+  }
+}
+on *:ACTION:*:#:{
+  if ($me isin $1-) {
+    /window -b @Highlights
+    echo @Highlights $asctime(h:nn:ss tt) : 62 $nick 50.62.74.86.|.74.62.50. $network 50.62.74.86.|.74.62.50. $chan 50.62.74.86.|.74.62.50. Message: 62 $+ $1-
+  }
+}
